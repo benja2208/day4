@@ -17,7 +17,7 @@ class Board
   end
 
   def place(ship, coord, orientation)
-    coords_array = all_coords(ship.size, coord, orientation)
+    coords_array = all_coords(ship.size, coord.upcase, orientation)
     fail 'No overlapping ships' unless (coords_array & ships).empty?
     array = coords_array.map { |coordinate| convert_to_array(coordinate) }
     mark_grid(array)
