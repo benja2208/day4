@@ -46,203 +46,203 @@ describe Board do
 
 end
 
-# require 'board'
+require 'board'
 
-# describe Board do
-#   let(:rand_num) { 55 }
-#   let(:ship) { double :ship }
-#   before(:each) { allow(ship).to receive(:got_hit) }
+describe Board do
+  let(:rand_num) { 55 }
+  let(:ship) { double :ship }
+  before(:each) { allow(ship).to receive(:got_hit) }
 
-#   describe '#place' do
-#     it 'should respond to place with 3 arguments' do
-#       expect(subject).to respond_to(:place).with(3).argument
-#     end
+  describe '#place' do
+    it 'should respond to place with 3 arguments' do
+      expect(subject).to respond_to(:place).with(3).argument
+    end
 
-#     it 'should not allow ships to overlap' do
-#       allow(ship).to receive(:size) { 2 }
-#       subject.place(ship, rand_num, :E)
-#       expect { subject.place(ship, rand_num + 1, :N) }.to\
-#         raise_error 'No overlapping ships'
-#     end
+    it 'should not allow ships to overlap' do
+      allow(ship).to receive(:size) { 2 }
+      subject.place(ship, rand_num, :E)
+      expect { subject.place(ship, rand_num + 1, :N) }.to\
+        raise_error 'No overlapping ships'
+    end
 
-#     context 'Ships (Size 1)' do
-#       before(:each) { allow(ship).to receive(:size) { 1 } }
-#       it 'should place a ship of size 1 on the board' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.ships.length).to eq 1
-#       end
+    context 'Ships (Size 1)' do
+      before(:each) { allow(ship).to receive(:size) { 1 } }
+      it 'should place a ship of size 1 on the board' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.ships.length).to eq 1
+      end
 
-#       it 'should keep track of the coordinates of the ship' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.ships).to eq [rand_num]
-#       end
+      it 'should keep track of the coordinates of the ship' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.ships).to eq [rand_num]
+      end
 
-#       it 'should keep track of which coordinates belong to the ship' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.coordinates[rand_num]).to eq ship
-#       end
+      it 'should keep track of which coordinates belong to the ship' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.coordinates[rand_num]).to eq ship
+      end
 
-#       it 'should keep track of which coordinates belong to the ship' do
-#         subject.place(ship, rand_num, :N)
-#         expect((subject.coordinates).length).to eq 1
-#       end
-#     end
+      it 'should keep track of which coordinates belong to the ship' do
+        subject.place(ship, rand_num, :N)
+        expect((subject.coordinates).length).to eq 1
+      end
+    end
 
-#     context 'Submarines (Size 2)' do
-#       before(:each) { allow(ship).to receive(:size) { 2 } }
-#       it 'should place a ship of size 2 on the board' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.ships.length).to eq 2
-#       end
+    context 'Submarines (Size 2)' do
+      before(:each) { allow(ship).to receive(:size) { 2 } }
+      it 'should place a ship of size 2 on the board' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.ships.length).to eq 2
+      end
 
-#       it 'should keep track of the coordinates of the submarine' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.ships).to eq [rand_num, rand_num - 1]
-#       end
+      it 'should keep track of the coordinates of the submarine' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.ships).to eq [rand_num, rand_num - 1]
+      end
 
-#       it 'should keep track of which coordinates belong to the submarine' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.coordinates[rand_num]).to eq ship
-#         expect(subject.coordinates[rand_num - 1]).to eq ship
-#       end
+      it 'should keep track of which coordinates belong to the submarine' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.coordinates[rand_num]).to eq ship
+        expect(subject.coordinates[rand_num - 1]).to eq ship
+      end
 
-#       it 'should keep track of which coordinates belong to the submarine' do
-#         subject.place(ship, rand_num, :N)
-#         expect((subject.coordinates).length).to eq 2
-#       end
+      it 'should keep track of which coordinates belong to the submarine' do
+        subject.place(ship, rand_num, :N)
+        expect((subject.coordinates).length).to eq 2
+      end
 
-#       it 'should place a ship facing north' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.ships).to eq [rand_num, rand_num - 1]
-#       end
+      it 'should place a ship facing north' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.ships).to eq [rand_num, rand_num - 1]
+      end
 
-#       it 'should place a ship facing east' do
-#         subject.place(ship, rand_num, :E)
-#         expect(subject.ships).to eq [rand_num, rand_num + 10]
-#       end
+      it 'should place a ship facing east' do
+        subject.place(ship, rand_num, :E)
+        expect(subject.ships).to eq [rand_num, rand_num + 10]
+      end
 
-#       it 'should place a ship facing south' do
-#         subject.place(ship, rand_num, :S)
-#         expect(subject.ships).to eq [rand_num, rand_num + 1]
-#       end
+      it 'should place a ship facing south' do
+        subject.place(ship, rand_num, :S)
+        expect(subject.ships).to eq [rand_num, rand_num + 1]
+      end
 
-#       it 'should place a ship facing west' do
-#         subject.place(ship, rand_num, :W)
-#         expect(subject.ships).to eq [rand_num, rand_num - 10]
-#       end
+      it 'should place a ship facing west' do
+        subject.place(ship, rand_num, :W)
+        expect(subject.ships).to eq [rand_num, rand_num - 10]
+      end
 
-#       it 'should not be sticking off the sides' do
-#         expect { subject.place(ship, 100, :S) }.to\
-#           raise_error 'Must be on the board'
-#       end
-#     end
+      it 'should not be sticking off the sides' do
+        expect { subject.place(ship, 100, :S) }.to\
+          raise_error 'Must be on the board'
+      end
+    end
 
-#     context 'Destroyer (Size 3)' do
-#       before(:each) { allow(ship).to receive(:size) { 3 } }
-#       it 'should place a ship of size 3 on the board' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.ships.length).to eq 3
-#       end
+    context 'Destroyer (Size 3)' do
+      before(:each) { allow(ship).to receive(:size) { 3 } }
+      it 'should place a ship of size 3 on the board' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.ships.length).to eq 3
+      end
 
-#       it 'should keep track of the coordinates of the destroyer' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.ships).to eq [rand_num, rand_num - 1, rand_num - 2]
-#       end
+      it 'should keep track of the coordinates of the destroyer' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.ships).to eq [rand_num, rand_num - 1, rand_num - 2]
+      end
 
-#       it 'should keep track of which coordinates belong to the destroyer' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.coordinates[rand_num]).to eq ship
-#         expect(subject.coordinates[rand_num - 1]).to eq ship
-#         expect(subject.coordinates[rand_num - 2]).to eq ship
-#       end
+      it 'should keep track of which coordinates belong to the destroyer' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.coordinates[rand_num]).to eq ship
+        expect(subject.coordinates[rand_num - 1]).to eq ship
+        expect(subject.coordinates[rand_num - 2]).to eq ship
+      end
 
-#       it 'should keep track of which coordinates belong to the destroyer' do
-#         subject.place(ship, rand_num, :N)
-#         expect((subject.coordinates).length).to eq 3
-#       end
+      it 'should keep track of which coordinates belong to the destroyer' do
+        subject.place(ship, rand_num, :N)
+        expect((subject.coordinates).length).to eq 3
+      end
 
-#       it 'should place a ship facing north' do
-#         subject.place(ship, rand_num, :N)
-#         expect(subject.ships).to eq [rand_num, rand_num - 1, rand_num - 2]
-#       end
+      it 'should place a ship facing north' do
+        subject.place(ship, rand_num, :N)
+        expect(subject.ships).to eq [rand_num, rand_num - 1, rand_num - 2]
+      end
 
-#       it 'should place a ship facing east' do
-#         subject.place(ship, rand_num, :E)
-#         expect(subject.ships).to eq [rand_num, rand_num + 10, rand_num + 20]
-#       end
+      it 'should place a ship facing east' do
+        subject.place(ship, rand_num, :E)
+        expect(subject.ships).to eq [rand_num, rand_num + 10, rand_num + 20]
+      end
 
-#       it 'should place a ship facing south' do
-#         subject.place(ship, rand_num, :S)
-#         expect(subject.ships).to eq [rand_num, rand_num + 1, rand_num + 2]
-#       end
+      it 'should place a ship facing south' do
+        subject.place(ship, rand_num, :S)
+        expect(subject.ships).to eq [rand_num, rand_num + 1, rand_num + 2]
+      end
 
-#       it 'should place a ship facing west' do
-#         subject.place(ship, rand_num, :W)
-#         expect(subject.ships).to eq [rand_num, rand_num - 10, rand_num - 20]
-#       end
+      it 'should place a ship facing west' do
+        subject.place(ship, rand_num, :W)
+        expect(subject.ships).to eq [rand_num, rand_num - 10, rand_num - 20]
+      end
 
-#       it 'should not be sticking off the sides' do
-#         expect { subject.place(ship, 100, :E) }.to\
-#           raise_error 'Must be on the board'
-#       end
-#     end
-#   end
+      it 'should not be sticking off the sides' do
+        expect { subject.place(ship, 100, :E) }.to\
+          raise_error 'Must be on the board'
+      end
+    end
+  end
 
-#   describe '#fire' do
-#     before(:each) { allow(ship).to receive(:size) { rand(1..2) } }
-#     before(:each) { subject.place(ship, rand_num, :N) }
-#     it 'should respond to fire with 1 argument' do
-#       expect(subject).to respond_to(:fire).with(1).argument
-#     end
+  describe '#fire' do
+    before(:each) { allow(ship).to receive(:size) { rand(1..2) } }
+    before(:each) { subject.place(ship, rand_num, :N) }
+    it 'should respond to fire with 1 argument' do
+      expect(subject).to respond_to(:fire).with(1).argument
+    end
 
-#     it 'should retrun :hit when it hits' do
-#       expect(subject.fire(rand_num)).to eq :hit
-#     end
+    it 'should retrun :hit when it hits' do
+      expect(subject.fire(rand_num)).to eq :hit
+    end
 
-#     it 'should return :miss when it misses' do
-#       expect(subject.fire(rand_num + 11)).to eq :miss
-#     end
+    it 'should return :miss when it misses' do
+      expect(subject.fire(rand_num + 11)).to eq :miss
+    end
 
-#     it 'should make the ship to receive got_hit when hit' do
-#       expect(ship).to receive(:got_hit)
-#       subject.fire(rand_num)
-#     end
+    it 'should make the ship to receive got_hit when hit' do
+      expect(ship).to receive(:got_hit)
+      subject.fire(rand_num)
+    end
 
-#     it 'should make the ship to receive got_hit when hit' do
-#       expect(ship).to_not receive(:got_hit)
-#       subject.fire(rand_num + 11)
-#     end
+    it 'should make the ship to receive got_hit when hit' do
+      expect(ship).to_not receive(:got_hit)
+      subject.fire(rand_num + 11)
+    end
 
-#     it 'should not register two hits when we hit the same spot' do
-#       expect(ship).to receive(:got_hit)
-#       subject.fire(rand_num)
-#       expect(ship).to_not receive(:got_hit)
-#       subject.fire(rand_num)
-#     end
+    it 'should not register two hits when we hit the same spot' do
+      expect(ship).to receive(:got_hit)
+      subject.fire(rand_num)
+      expect(ship).to_not receive(:got_hit)
+      subject.fire(rand_num)
+    end
 
-#     it 'should log the hit(s)' do
-#       subject.fire(rand_num)
-#       expect(subject.hits).to eq [rand_num]
-#     end
-g
-#     it 'should log the miss(es)' do
-#       subject.fire(rand_num + 11)
-#       expect(subject.misses).to eq [rand_num + 11]
-#     end
-#   end
+    it 'should log the hit(s)' do
+      subject.fire(rand_num)
+      expect(subject.hits).to eq [rand_num]
+    end
 
-#   describe '#all_sunk?' do
-#     before(:each) { allow(ship).to receive(:size) { rand(1..2) } }
-#     before(:each) { subject.place(ship, rand_num, :N) }
-#     it 'should return true if all ships are sunk' do
-#       subject.fire(rand_num)
-#       subject.fire(rand_num - 1)
-#       expect(subject.all_sunk?).to eq true
-#     end
+    it 'should log the miss(es)' do
+      subject.fire(rand_num + 11)
+      expect(subject.misses).to eq [rand_num + 11]
+    end
+  end
 
-#     it 'should return false if all ships are not sunk' do
-#       subject.fire(rand_num - 11)
-#       expect(subject.all_sunk?).to eq false
-#     end
-#   end
-# end
+  describe '#all_sunk?' do
+    before(:each) { allow(ship).to receive(:size) { rand(1..2) } }
+    before(:each) { subject.place(ship, rand_num, :N) }
+    it 'should return true if all ships are sunk' do
+      subject.fire(rand_num)
+      subject.fire(rand_num - 1)
+      expect(subject.all_sunk?).to eq true
+    end
+
+    it 'should return false if all ships are not sunk' do
+      subject.fire(rand_num - 11)
+      expect(subject.all_sunk?).to eq false
+    end
+  end
+end
