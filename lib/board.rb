@@ -16,7 +16,7 @@ class Board
   end 
 
   def place (ship, coord, orientation)
-  	array = all_coords(ship.size, coord, orientation)
+  	array = all_coords(ship.size, coord.upcase, orientation)
     raise 'Outside the board' if any_coord_not_on_board?(array)
     raise 'Those coordinates are already used!' unless coordinates_exist?(array)
     array.each do |coord|
